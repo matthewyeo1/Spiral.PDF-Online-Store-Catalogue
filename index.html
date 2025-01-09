@@ -2,15 +2,104 @@
 <html>
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
-  <title>replit</title>
-  <link href="style.css" rel="stylesheet" type="text/css" />
+  <title>SpiralPDF</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Chewy&display=swap" rel="stylesheet">
+
 </head>
 
 <body>
-  Hello world
+  <div class="title">spiral.pdf</div>
+  <div class="dropdownbar">
+    <div class="dropdown">
+      <button class="dropdownbutton">filter items</button>
+
+      <div class="dropdown-menu">
+        <a href="#" onclick="filterImages('all'); return false;">all</a>
+        <a href="#" onclick="filterImages('charms'); return false;">charms</a>
+        <a href="#" onclick="filterImages('diaries'); return false;">diaries</a>
+        <a href="#" onclick="filterImages('headwear'); return false;">headwear</a>
+        <a href="#" onclick="filterImages('badges'); return false;">badges</a>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="container">
+    <img src="assets/images/apple_charms.jpg" alt="item 1" class="image-item charms" data-index="1" data-name="Apple Charm" data-item-price="5.00"
+      data-description="Apple charms! Comes in red, yellow and green at $5 a piece.">
+    <img src="assets/images/diary.jpg" alt="item 2" class="image-item diaries" data-index="2" data-name="Diary" data-item-price="15.00"
+      data-description="Something to hold your precious secrets and dreams. $15 each.">
+    <img src="assets/images/apple_hat.jpg" alt="item 3" class="image-item headwear" data-index="3" data-name="Apple Hat" data-item-price="15.00"
+      data-description="Apple! Hat! $15.">
+    <img src="assets/images/icecream_charms_multicolour.jpg" alt="item 4" class="image-item charms" data-index="4" data-name="Ice Cream Charms (multicolour)" data-item-price="5.00"
+      data-description="Them smol cones come in green, pink and blue for $5 a piece.">
+    <img src="assets/images/icecream_charms_choc.jpg" alt="item 5" class="image-item charms" data-index="5" data-name="Ice Cream Charms (chocolate)" data-item-price="5.00"
+      data-description="2-cool-4-u chocolate cone charms for $5 a piece.">
+    <img src="assets/images/pomegranate_badge.jpg" alt="item 6" class="image-item badges" data-index="6" data-name="Pomegranate Badge" data-item-price="7.00"
+      data-description="A pair of these fruity-patootie badges costs $7.">
+    <img src="assets/images/cherry_badge.jpg" alt="item 7" class="image-item charms" data-index="7" data-name="Cherry Badge (red)" data-item-price="5.00"
+      data-description="The cherry-on-top (literally)! $5 a piece.">
+    <img src="assets/images/tomato_badge.jpg" alt="item 8" class="image-item badges" data-index="8" data-name="Tomato Badge" data-item-price="3.00"
+      data-description="Your daily reminder to eat your vegetables, selling at $3 each."> 
+    <img src="assets/images/special_tomato_badge.jpg" alt="item 9" class="image-item badges" data-index="9" data-name="Special Tomato Badge" data-item-price="4.00"
+      data-description="Your daily reminder to eat your vegetables, but a lil cooler :3. $4 each.">
+    <img src="assets/images/special_pomegranate_badge_a.jpg" alt="item 10" class="image-item charms" data-index="10" data-name="Special Pomegranate Badge" data-item-price="10.00"
+      data-description="Ah, living in a pomegranate-shaped home would be delightful...right? $10 each.">
+    <img src="assets/images/special_apple_badge.jpg" alt="item 11" class="image-item badges" data-index="11" data-name="Special Apple Badge" data-item-price="6.00"
+      data-description="So cutesy, so demure. And keeps the doctor away. $6 a piece.">
+    <img src="assets/images/special_apple_badge_pokemon.jpg" alt="item 12" class="image-item charms" data-index="12" data-name="Special Apple Badge (with Bob)" data-item-price="10.00"
+      data-description="He's just like me frfr. $10 each.">
+    <img src="assets/images/special_pear_badge.jpg" alt="item 13" class="image-item badges" data-index="13" data-name="Special Pear Badge" data-item-price="6.00"
+      data-description="It ap-pear-s that this pear has some glam (I hate myself). $6 each.">
+    <img src="assets/images/special_pear_badge_mice.jpg" alt="item 14" class="image-item charms" data-index="14" data-name="Special Pear Badge (with Sylvanians)" data-item-price="10.00"
+      data-description="Looks like the Sylvanian family has found their new home...in a pear??? $10 a piece.">
+    <img src="assets/images/cherry_badge_pink.jpg" alt="item 15" class="image-item badges" data-index="15" data-name="Cherry Badge (pink)" data-item-price="5.00"
+      data-description="Cherry badges...but pink! $5 a piece.">
+  </div>
+
+  <div class="overlay" id="overlay">
+    <div class="description-box">
+      <button class="close-btn" id="close-btn">&times;</button>
+      <p id="description-text">
+        hello
+      </p>
+      <button class="add-to-cart-btn" id="add-to-cart-btn">Add to Cart</button>
+    </div>
+  </div>
+
+  <div id="snackbar">Item added to cart!</div>
+  
+  <div class="cart-icon" id="cart-icon">
+    <img id="cart-icon-image" src="assets/images/cart_icon.jpg" alt="Cart">
+    <span id="cart-count">0</span>
+    <ul id="cart-items"></ul>
+  </div>
+
+
+  <div class="cart-overlay" id="cart-overlay">
+    <div class="cart-content">
+      <button class="close-btn-cart" id="close-cart-overlay-btn">&times;</button>
+      <h2>Your Cart</h2>
+
+      <p id="empty-cart-message">Your Cart is Empty</p>
+      
+      <ul id="cart-items-list"></ul>
+
+      <div class="cart-total">
+        <span>Total: $<span id="cart-total-price">0.00</span></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="contact-links">
+    <a href="https://www.instagram.com/spiral.pdf/" target="_blank" class="contact-link">
+      <img src="https://img.icons8.com/ios-filled/50/ffffff/instagram-new.png" alt="Instagram" class="contact-icon">
+    </a>
+  </div>
+
   <script src="script.js"></script>
+
 </body>
 
 </html>
